@@ -1,38 +1,42 @@
-.App {
-  text-align: center;
+
+.bg-main {
+  background-image: url(./imagens/background-home.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: -55px;
+  background-position-x: 0px;
+  width: 100%;
+  
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.cardincomplet {
+  background-color: rgba(17, 17, 17, 0.226);
+  border-color: rgba(255, 255, 255, 0.089);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.cardComplet {
+  background-color: #202020;
+  border-color: rgba(255, 255, 255, 0.089);
+  border-radius: 30px;
+}
+
+.baloo {
+  font-family: 'Baloo 2', cursive;
+}
+
+.form-control:focus {
+      border-color:gray!important;
+      -webkit-box-shadow: none!important;
+      -moz-box-shadow: none!important;
+      box-shadow: none!important;
+      color: black !important;
+      font-weight: 500;
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+  .inp:hover {
+        background-color:#ffc709!important;
+        -webkit-box-shadow: none!important;
+        -moz-box-shadow: none!important;
+        box-shadow: none!important;
+        color: black !important;
+    }
