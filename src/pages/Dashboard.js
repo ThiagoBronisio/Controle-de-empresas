@@ -1,10 +1,11 @@
 import react from "react";
 
-export default function Dashboard() {
+const Dashboard = () => (
 
-    return (
         <div>
             <h1>Dashboard!</h1>
         </div>
-    )
-}
+
+)
+
+export default Dashboard;

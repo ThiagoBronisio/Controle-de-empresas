@@ -8,35 +8,89 @@
   width: 100%;
   
 }
-
-.cardincomplet {
-  background-color: rgba(17, 17, 17, 0.226);
-  border-color: rgba(255, 255, 255, 0.089);
+.logo-cadastro {
+  width: 250px;
+  height: 80px;
+  margin-top: 25px;
 }
 
-.cardComplet {
-  background-color: #202020;
-  border-color: rgba(255, 255, 255, 0.089);
-  border-radius: 30px;
-}
-
+ /* FONTES DO PROJETO */
 .baloo {
   font-family: 'Baloo 2', cursive;
 }
+/* FIM */
 
-.form-control:focus {
-      border-color:gray!important;
-      -webkit-box-shadow: none!important;
-      -moz-box-shadow: none!important;
-      box-shadow: none!important;
-      color: black !important;
-      font-weight: 500;
-  }
 
-  .inp:hover {
+/* LABEL E INPUTS */
+.labell {
+  padding: 15px 2px 2px 2px ;
+  font-weight: 700;
+  font-size: 17px;
+  color: #6c757d;
+  margin-bottom: 6px;
+
+}
+
+.inputt-cadastro {
+  border-radius: 5px;
+  background-color: #DCDCDC;
+  max-width: 800px;
+  min-width: 260px;
+  max-height: 60px;
+  min-height: 45px;
+}
+
+.input-home:focus {
+  box-shadow: 0 0 0 0;
+  border: none;
+  outline: 0;
+}
+
+/* FIM */
+
+/* BUTTONS DO PROJETO */
+.btn-cadastro {
+  background-color:#ffc709;
+  border-color:#ffc709;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 400;
+  height: 42px;
+  font-family:"baloo 2";
+}
+
+.btn-voltar {
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 400;
+  height: 40px;
+  font-family:"baloo 2";
+}
+
+.btn-voltar:hover{
+  background-color:#6c757d!important;
+  -webkit-box-shadow: none!important;
+  -moz-box-shadow: none!important;
+  box-shadow: none!important;
+  color: white !important;
+}
+
+.bttn:hover {
         background-color:#ffc709!important;
         -webkit-box-shadow: none!important;
         -moz-box-shadow: none!important;
         box-shadow: none!important;
-        color: black !important;
+        color: white !important;
     }
+
+.mx-auto {
+  margin-right: auto!important;
+  margin-left: auto!important;
+}
+/* FIM */
+
+.img-cadastro{
+  max-width: 350px;
+  min-width: 80px;
+
+}

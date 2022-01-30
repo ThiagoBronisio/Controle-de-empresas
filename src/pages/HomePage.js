@@ -1,12 +1,13 @@
 import react from "react";
 import bootstrap from "bootstrap";
 import HomeForms from "../forms/HomeFoms";
-import dash from "../imagens/dash.png"
+import Header from "../components/Header";
 
-const Home = () => (
+const HomePage = () => (
     <>
+        <Header/>
         <div className="row justify-content-center d-flex bg-main m-0">
-            <div className="col-6 " style={{ width: "600px" }}>
+            <div className="col-sm-1 col-lg-6 " style={{ width: "600px" }}>
                 <div className="card shadow mt-5 rounded-0 p-3" style={{ marginBottom: "50px" }}>
                     <div className="card-body px-2 p-3">
                         <div className="text-start px-4">
@@ -26,7 +27,7 @@ const Home = () => (
 
             <div className="row justify-content-center container d-flex" style={{ marginLeft: "auto", marginRight:"auto" }}>
 
-                <div className="col-4">
+                <div className="col-sm-12 col-md-6 col-lg-4">
                     <div className="card text-secondary shadow mt-5">
                         <div className="card-body px-2 p-3">
                             <div className="text-center px-4 mt-3 fw-bold">
@@ -45,7 +46,7 @@ const Home = () => (
                     </div>
                 </div>
 
-                <div className="col-4">
+                <div className="col-sm-12 col-md-6 col-lg-4">
                     <div className="card text-secondary shadow mt-5">
                         <div className="card-body px-2 p-3">
                             <div className="text-center px-4 mt-3 fw-bold">
@@ -63,7 +64,7 @@ const Home = () => (
                     </div>
                 </div>
 
-                <div className="col-4">
+                <div className="col-sm-12 col-md-6 col-lg-4">
                     <div className="card text-secondary shadow mt-5">
                         <div className="card-body px-2 p-3">
                             <div className="text-center px-4 mt-3 fw-bold">
@@ -91,4 +92,4 @@ const Home = () => (
 )
 
 
-export default Home;
+export default HomePage;

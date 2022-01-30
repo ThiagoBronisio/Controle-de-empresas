@@ -3,6 +3,8 @@ import bootstrap from "bootstrap";
 import ConsultarForms from "../forms/ConsultarForms";
 
 const ConsultarEmpresas = () => (
+
+    <>
     <div className="row justify-content-center d-flex ">
         <div className="col-6 mt-4">
             <div className="card shadow">
@@ -15,6 +17,7 @@ const ConsultarEmpresas = () => (
             </div>
         </div>
     </div>
+    </>
 )
 
 export default ConsultarEmpresas;

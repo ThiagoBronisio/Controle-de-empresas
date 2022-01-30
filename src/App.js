@@ -1,15 +1,16 @@
-import logo from './logo.svg';
+
 import './App.css';
+import HomePage from './pages/HomePage';
 import Header from './components/Header';
-import Main from './components/Main';
+import Rotas from './components/Rotas';
 
 export default function App() {
   return (
+    <>
     <div>
-      <Header/>
-      <Main/> 
-      
+      <Rotas/>
     </div>
+    </>
   )
 }
 

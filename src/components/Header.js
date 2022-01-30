@@ -7,7 +7,7 @@ export default function Header() {
     return (
     
         <nav className="navbar navbar-expand-lg menu" style={{backgroundColor: "#1e1f21"}}>
-            <div className="container-fluid container fw-bolder">
+            <div className="container-fluid  fw-bolder">
 
                 <img src={logo} style={{width:"200px", marginRight:"700px", marginLeft:"100px"}} className="navbar-brand container text-light text-start"></img>
                 
