@@ -24,7 +24,7 @@ export default function ConsultarForms() {
         <form onSubmit={handleSubmit(onSubmit)} className="container">
 
             <div className="row justify-content-center mt-5">
-                <div className="col-sm-6 col-lg-5 px-0">
+                <div className="col-sm-6 col-lg-8 px-0">
 
                     <Controller
                         control={control}
@@ -34,18 +34,24 @@ export default function ConsultarForms() {
                         render={
                             ({ field: { onChange, onBlur, value } }) => (
 
-                                <TextField 
-                                    fullWidth
-                                    id="empresa"
-                                    type="text"
-                                    id="outlined-basic" 
-                                    size="small"
-                                    className="form-control "
-                                    label="Nome da empresa" 
-                                    variant="outlined" 
-                                    onChange={onChange}
-                                    onBlur={onBlur}
-                                    value={value}/>
+
+
+                                <div className="input-group">
+                                    <input
+                                        id="empresa"
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Nome da empresa"
+                                        onChange={onChange}
+                                        onBlur={onBlur}
+                                        value={value} />
+                                    <button
+                                        className="btn btn-primary"
+                                        type="submit"
+                                        >Pesquisar</button>
+
+
+                                </div>
                             )
                         }
                     />
@@ -57,48 +63,36 @@ export default function ConsultarForms() {
 
                 </div>
 
-                <div className="col-sm-6  col-lg-1 text-start">
-                    <Button variant="contained" size="large"><i className="fas fa-search fs-5"></i></Button>
-                </div>
 
             </div>
 
-            <div className="row justify-content-start mt-5 baloo">
-                <div className="col-sm-12 col-lg-4">
-                    <div className="card shadow border-4 mb-sm-3" style={{ borderBottom: "none", borderTop: "none", borderRight: "none", borderColor: "#42a5f5" }}>
-                        <div className="card-body">
-                            <h4 className="text-center mb-4">EMPRESA</h4>
-                            <p> <span className="fs-5">Nome da empresa: </span>Visual Empresarial</p>
-                            <p> <span className="fs-5">Razão social: </span> Empresa Modelo LTDA RJ</p>
-                            <p> <span className="fs-5">CNPJ: </span> 28.364.665/0001-01</p>
-                            <p> <span className="fs-5">Telefone: </span> (21) 99999-9999</p>
+            <div className="row justify-content-center mt-4 baloo">
+                <div className="col-sm-12 col-lg-12 mt-2">
+                    <div className="card shadow border-4 mb-sm-3" style={{ borderBottom: "none", borderTop: "none", borderRight: "none", borderColor: "#002171" }}>
+                        <div className="card-body p-3">
+
+                            <div className="row">
+                                <div className="col-12">
+
+                                    <i class="fas fa-university fs-4">
+                                        <span className="baloo fw-normal fs-5">
+                                            - Valoreal intermediação de negocios LTDA
+                                        </span>
+                                    </i>
+
+                                    <span type="button" className="primaryMUI fs-4 text-end" style={{marginLeft: "80px"}}>
+                                        <i class="fas fa-eye"></i>
+
+                                    </span>
+                                </div>
+
+
+                            </div>
+
                         </div>
                     </div>
                 </div>
 
-                <div className="col-sm-12 col-lg-4">
-                    <div className="card shadow border-4 mb-sm-3" style={{ borderBottom: "none", borderTop: "none", borderRight: "none", borderColor: "#42a5f5" }}>
-                        <div className="card-body">
-                            <h4 className="text-center mb-4">EMPRESA</h4>
-                            <p> <span className="fs-5">Nome da empresa: </span> Visual Empresarial</p>
-                            <p> <span className="fs-5">Razão social: </span> Empresa Modelo LTDA RJ</p>
-                            <p> <span className="fs-5">CNPJ: </span> 28.364.665/0001-01</p>
-                            <p> <span className="fs-5">Telefone: </span> (21) 99999-9999</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="col-sm-12 col-lg-4">
-                    <div className="card shadow border-4 mb-sm-3" style={{ borderBottom: "none", borderTop: "none", borderRight: "none", borderColor: "#42a5f5" }}>
-                        <div className="card-body">
-                            <h4 className="text-center mb-4">EMPRESA</h4>
-                            <p> <span className="fs-5">Nome da empresa: </span> Visual Empresarial</p>
-                            <p> <span className="fs-5">Razão social: </span> Empresa Modelo LTDA RJ</p>
-                            <p> <span className="fs-5">CNPJ: </span> 28.364.665/0001-01</p>
-                            <p> <span className="fs-5">Telefone: </span> (21) 99999-9999</p>
-                        </div>
-                    </div>
-                </div>
             </div>
 
 

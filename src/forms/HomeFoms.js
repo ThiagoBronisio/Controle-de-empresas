@@ -3,10 +3,12 @@ import reactDom from "react-dom";
 import { useForm, Controller } from "react-hook-form";
 import bootstrap from "bootstrap";
 import * as authHelpers from "../helpers/auth-helpers"
-import * as loginServices from "../services/login-services"
+import * as accountServices from "../services/account-services"
 import { NavLink } from "react-router-dom";
 import textValidation from "../validation/text-validation";
 import TextField from "@mui/material/TextField";
+import Alert from "@mui/material/Alert"
+import passwordValidation from "../validation/password-validation";
 
 
 export default function HomeForms() {
@@ -26,7 +28,7 @@ export default function HomeForms() {
 
         setMensagemErro("")
 
-        loginServices.postLogin(data)
+        accountServices.postLogin(data)
 
             .then(
                 result => {
@@ -36,13 +38,13 @@ export default function HomeForms() {
                         email: "",
                         senha: ""
                     });
-                    window.location.href = "/cadastrar-empresas"
+                    window.location.href = "/consultar-empresas"
                 }
             )
             .catch(
                 e => {
-                    setMensagemErro("Error")
-                    console.log(e)
+                    setMensagemErro("Usuário inválido")
+                    console.log(e.response)
                 }
             )
 
@@ -52,14 +54,14 @@ export default function HomeForms() {
         <form onSubmit={handleSubmit(onSubmit)} className="px-4" autoComplete="off">
 
             {
-                mensagemErro && <div className="alert alert-danger text-center p-2">
-                    {mensagemErro}, usuário inválido
-                </div>
+                mensagemErro && <Alert severity="error" size="normal">
+                    {mensagemErro}
+                </Alert>
             }
 
 
             <div className="row">
-                <div className="col-12">
+                <div className="col-12 mt-3">
                     <Controller
 
                         control={control}
@@ -85,7 +87,7 @@ export default function HomeForms() {
                         }
                     />
                     {
-                        errors.email && <div className="text-danger">
+                        errors.email && <div className="text-danger baloo">
                             {errors.email.message}
                         </div>
                     }
@@ -99,7 +101,7 @@ export default function HomeForms() {
                         control={control}
                         name="senha"
                         defaultValue=""
-                        rules={{ validate: textValidation }}
+                        rules={{ validate: passwordValidation }}
                         render={
                             ({ field: { onChange, onBlur, value } }) => (
                                 <TextField
@@ -120,7 +122,7 @@ export default function HomeForms() {
                         }
                     />
                     {
-                        errors.senha && <div className="text-danger">
+                        errors.senha && <div className="text-danger baloo">
                             {errors.senha.message}
                         </div>
                     }
@@ -133,11 +135,11 @@ export default function HomeForms() {
 
             <div className="row">
                 <div className="col-sm-12 col-md-6 col-lg-6 mt-3 text-center">
-                    <NavLink to="esqueci-senha" className=" text-decoration-none border-bottom border-2 border-primary text-dark border-home">Esqueci minha senha</NavLink>
+                    <NavLink to="esqueci-senha" className=" text-decoration-none border-bottom border-2 border-primaryMui text-dark border-home">Esqueci minha senha</NavLink>
                 </div>
 
                 <div className=" col-sm-12 col-md-6 col-lg-6 mt-3 text-center ">
-                    <NavLink to="register-account" className=" text-decoration-none border-bottom border-2 border-primary text-dark border-home">Ainda não me cadastrei</NavLink>
+                    <NavLink to="register-account" className=" text-decoration-none border-bottom border-2 border-primaryMui text-dark border-home">Ainda não me cadastrei</NavLink>
                 </div>
             </div>
 

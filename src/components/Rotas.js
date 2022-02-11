@@ -15,6 +15,8 @@ const Rotas = () => (
         <Route path="cadastrar-empresas" element={<CadastrarEmpresas/>} />
         <Route path="register-account" element={<RegisterPage/>} />
         <Route path="esqueci-senha" element={<PasswordPage/>} />
+        
+        
     </Routes>
 )
 

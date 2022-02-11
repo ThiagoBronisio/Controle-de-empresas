@@ -1,11 +1,13 @@
 import react, { useState } from "react";
 import { useForm, Controller } from "react-hook-form"
+import { NavLink } from "react-router-dom"
 import InputMask from "react-input-mask";
 import bootstrap from "bootstrap";
 import textValidation from "../validation/text-validation";
 import * as services from "../services/empresas-services"
 import * as helpers from "../helpers/auth-helpers"
 import TextField from "@mui/material/TextField";
+import Alert from "@mui/material/Alert"
 
 
 export default function CadastrarEmpresas() {
@@ -48,25 +50,24 @@ export default function CadastrarEmpresas() {
 
         <form onSubmit={handleSubmit(onSubmit)} className=" container" style={{ paddingTop: "60px", paddingRight: "60px", paddingBottom: "60", paddingLeft: "60px" }} autoComplete="off">
 
-            {
-                mensagemSucesso && <div className="alert alert-success">
+{
+                mensagemSucesso && <div className="mb-3"><Alert severity="success" size="normal">
                     {mensagemSucesso}
-                </div>
+                </Alert></div>
             }
 
             {
-                mensagemErro && <div className="alert alert-danger">
+                mensagemErro && <div className="mb-3"><Alert severity="error" size="normal">
                     {mensagemErro}
-                </div>
+                </Alert></div>
             }
 
             <div className="row justify-content-center d-flex">
-                <div className="col-sm-12 col-lg-12 ">
+                <div className="col-sm-12 col-lg-10 ">
                     <Controller
                         control={control}
                         name="nomeFantasia"
                         defaultValue=""
-                        rules={{ validate: textValidation }}
                         render={
                             ({ field: { onChange, onBlur, value } }) => (
                                 <TextField
@@ -88,21 +89,15 @@ export default function CadastrarEmpresas() {
 
                     />
                 </div>
-                {
-                    errors.nomeFantasia && <div className="text-danger justify-content-center d-flex">
-                        {errors.nomeFantasia.message}
-                    </div>
-                }
             </div>
 
             <div className="row justify-content-center d-flex">
-                <div className="col-sm-12 col-lg-12 ">
+                <div className="col-sm-12 col-lg-10 ">
 
                     <Controller
                         control={control}
                         name="razaoSocial"
                         defaultValue=""
-                        rules={{ validate: textValidation }}
                         render={
                             ({ field: { onChange, onBlur, value } }) => (
                                 <TextField
@@ -124,15 +119,10 @@ export default function CadastrarEmpresas() {
 
                     />
                 </div>
-                {
-                    errors.razaoSocial && <div className="text-danger justify-content-center d-flex">
-                        {errors.razaoSocial.message}
-                    </div>
-                }
             </div>
 
             <div className="row justify-content-center d-flex">
-                <div className="col-sm-12 col-lg-12 ">
+                <div className="col-sm-12 col-lg-10 ">
 
                     <Controller
                         control={control}
@@ -167,16 +157,16 @@ export default function CadastrarEmpresas() {
                         }
 
                     />
+                    {
+                        errors.cnpj && <div className="text-danger baloo">
+                            {errors.cnpj.message}
+                        </div>
+                    }
                 </div>
-                {
-                    errors.cnpj && <div className="text-danger justify-content-center d-flex">
-                        {errors.cnpj.message}
-                    </div>
-                }
             </div>
 
             <div className="row justify-content-center d-flex">
-                <div className="col-sm-12 col-lg-12">
+                <div className="col-sm-12 col-lg-10">
 
                     <Controller
                         control={control}
@@ -209,19 +199,19 @@ export default function CadastrarEmpresas() {
                         }
 
                     />
+                    {
+                        errors.telefone && <div className="text-danger baloo">
+                            {errors.telefone.message}
+                        </div>
+                    }
                 </div>
-                {
-                    errors.telefone && <div className="text-danger justify-content-center d-flex">
-                        {errors.telefone.message}
-                    </div>
-                }
             </div>
 
             <div className="row">
                 <button type="submit" className="btn-cadastro col-sm-12 col-lg-6 mx-auto mt-5 text-light">Cadastrar</button>
             </div>
             <div className="row">
-                <a href="/consultar-empresas" className="btn btn-voltar text-dark col-sm-12 col-lg-6 mx-auto mt-3 pd-2"> Consultar Empresas</a>
+                <NavLink to="/consultar-empresas" className="btn btn-voltar text-dark col-sm-12 col-lg-6 mx-auto mt-3 pd-2"> Consultar Empresas</NavLink>
             </div>
         </form>
     )

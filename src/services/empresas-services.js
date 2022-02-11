@@ -13,7 +13,7 @@ export const postEmpresas = (data) => {
 
 axios.interceptors.request.use(
     config => {
-        if (config.url.includes("/api/Empresas")) {
+        if (config.url.includes("/Empresas")) {
 
             var token = helpers.getAccsessToken();
             config.headers['Authorization'] = `Bearer` + token;

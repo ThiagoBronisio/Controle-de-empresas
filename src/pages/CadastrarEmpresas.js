@@ -1,4 +1,5 @@
 import react from "react";
+import { NavLink } from "react-router-dom"
 import bootstrap from "bootstrap";
 import CadastroForms from "../forms/CadastroForms";
 import imgCadastro from "../imagens/img-cadastro.png";
@@ -23,7 +24,7 @@ export default function CadastrarEmpresas() {
                 <div className="col-sm-12 col-md-12 col-lg-7 bg-dark">
 
                     <div className="row justify-content-center d-flex " style={{marginTop:"50px", marginBottom:"30px"}}>
-                        <a className="col-sm-6 col-lg-6" href="/consultar-empresas"> <i className="fas fa-arrow-left fs-3 text-warning mt-4"></i></a>
+                        <NavLink to="/consultar-empresas" className="col-sm-6 col-lg-6"> <i className="fas fa-arrow-left fs-3 text-warning mt-4"></i></NavLink>
                         <img src={logo} className=" col-sm-6 col-lg-6 logo-cadastro"></img>
                     </div>
 
@@ -47,7 +48,7 @@ export default function CadastrarEmpresas() {
                     <div className=" px-0 bg-light he-100 w-100" style={{paddingTop: "50px"}}>
 
                             <div className="text-start px-5">
-                                <p className="col-sm-12 col-lg-12 container baloo">Deseja sair da conta ? <a href="/" onClick={ () => sairPage() }>Clique aqui</a></p></div>
+                                <p className="col-sm-12 col-lg-12 container baloo">Deseja sair da conta ? <a href="#" onClick={ () => sairPage() }>Clique aqui</a></p></div>
                             <div className="text-start px-5 ">
                                 <h5 className="baloo text-dark col-sm-12 col-lg-12 container">Preencha as informações abaixo para cadastrar a empresa desejada.</h5>
                             </div>

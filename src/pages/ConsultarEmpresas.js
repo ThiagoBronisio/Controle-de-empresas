@@ -11,7 +11,7 @@ const ConsultarEmpresas = () => (
         </div>
         <body className="mt-5 container">
             <div className="row justify-content-center d-flex">
-                <div className="col-sm-12 col-lg-12 mt-4">
+                <div className="col-sm-12 col-lg-6 mt-4">
                     <div className="card shadow ">
                         <div className="card-body">
                             <div className="text-center">

@@ -2,9 +2,11 @@ import react, { useState } from "react";
 import { useForm, Controller } from 'react-hook-form';
 import bootstrap from "bootstrap";
 import * as authHelpers from "../helpers/auth-helpers"
-import * as registerServices from "../services/register-services"
+import * as accountServices from "../services/account-services"
 import textValidation from "../validation/text-validation";
+import passwordValidation from "../validation/password-validation";
 import TextField from "@mui/material/TextField";
+import Alert from "@mui/material/Alert"
 
 
 export default function RegisterForms() {
@@ -25,7 +27,7 @@ export default function RegisterForms() {
         setMensagemSucesso("")
         setMensagemErro("")
 
-        registerServices.postRegister(data)
+        accountServices.postRegister(data)
             .then(
                 result => {
                     setMensagemSucesso(result.message)
@@ -39,8 +41,20 @@ export default function RegisterForms() {
             )
             .catch(
                 e => {
-                    setMensagemErro("Erro, tente novamente")
-                    console.log(e)
+                    switch(e.response.status){
+                        case 400:
+                            setMensagemErro("As senhas não conferem.")
+                       break;
+                        
+                       case 422:
+                           setMensagemErro("Email já cadastro em nosso sistema.")
+                        break;
+
+                        default:
+                            setMensagemErro("Erro, tente mais tarde.")
+                    }
+
+                    
                 }
             )
 
@@ -49,19 +63,30 @@ export default function RegisterForms() {
     return (
 
         <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-            
+
             {
-                mensagemSucesso && <div className="alert alert-success">
-                    {mensagemSucesso}
+                mensagemSucesso &&
+                <div className="row justify-content-center mt-4">
+                    <div className="col-sm-12 col-lg-8"><Alert severity="success">
+                        {mensagemSucesso}
+                    </Alert>
+
+                    </div>
                 </div>
             }
 
             {
-                mensagemErro && <div className="alert alert-danger">
-                    {mensagemErro}
+                mensagemErro &&
+
+                <div className="row justify-content-center mt-4">
+                    <div className="col-sm-12 col-lg-8"><Alert severity="error">
+                        {mensagemErro}
+                    </Alert>
+
+                    </div>
                 </div>
             }
-                    
+
 
 
 
@@ -89,13 +114,17 @@ export default function RegisterForms() {
                                     onBlur={onBlur}
                                     value={value}>
 
-                                
-                                        
+
+
                                 </TextField>
                             )
                         }
-                        
                     />
+                    {
+                        errors.nome && <div className="text-danger">
+                            {errors.nome.message}
+                        </div>
+                    }
                 </div>
             </div>
 
@@ -107,6 +136,7 @@ export default function RegisterForms() {
                         control={control}
                         name="email"
                         defaultValue=""
+                        rules={{ validate: textValidation}}
                         render={
                             ({ field: { onChange, onBlur, value } }) => (
 
@@ -125,6 +155,11 @@ export default function RegisterForms() {
                             )
                         }
                     />
+                    {
+                        errors.email && <div className="text-danger">
+                            {errors.email.message}
+                        </div>
+                    }
                 </div>
             </div>
 
@@ -136,6 +171,7 @@ export default function RegisterForms() {
                         control={control}
                         name="senha"
                         defaultValue=""
+                        rules={{ validate: passwordValidation}}
                         render={
                             ({ field: { onChange, onBlur, value } }) => (
                                 <TextField
@@ -153,6 +189,11 @@ export default function RegisterForms() {
                             )
                         }
                     />
+                    {
+                        errors.senha && <div className="text-danger">
+                            {errors.senha.message}
+                        </div>
+                    }
                 </div>
             </div>
 
@@ -164,6 +205,7 @@ export default function RegisterForms() {
                         control={control}
                         name="senhaConfirmacao"
                         defaultValue=""
+                        rules={{ validate: passwordValidation}}
                         render={
                             ({ field: { onChange, onBlur, value } }) => (
                                 <TextField
@@ -182,6 +224,11 @@ export default function RegisterForms() {
                         }
 
                     />
+                    {
+                        errors.senhaConfirmacao && <div className="text-danger">
+                            {errors.senhaConfirmacao.message}
+                        </div>
+                    }
                 </div>
             </div>
 

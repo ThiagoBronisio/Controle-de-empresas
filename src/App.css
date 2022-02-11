@@ -36,13 +36,14 @@
 
 /* BUTTONS DO PROJETO */
 .btn-cadastro {
-  background-color:#42a5f5;
-  border-color:#42a5f5;
+  background-color:#002171;
+  border-color:#002171;
   border-radius: 10px;
   font-size: 18px;
   font-weight: 400;
   height: 42px;
   font-family:"baloo 2";
+  width: 300px;
 }
 
 .btn-voltar {
@@ -62,7 +63,7 @@
 }
 
 .bttn:hover {
-        background-color:#42a5f5!important;
+        background-color:#002171!important;
         -webkit-box-shadow: none!important;
         -moz-box-shadow: none!important;
         box-shadow: none!important;
@@ -142,12 +143,43 @@
   }
 
 }
+.border-primaryMui{
+  border-color: #002171 !important;
+}
 
 .border-home:hover{
-  border-bottom: 3.5px #42a5f5 solid !important;
+  border-bottom: 3.5px #002171 solid !important;
   border-radius: 2.5px;
 }
 
 .primaryMUI {
-  color:#42a5f5;
+  color:#002171 !important;
+}
+
+.backHeader {
+  background-color: #002171 !important;
+}
+
+.passwordResponse {
+  padding-top: 64px;
+  padding-bottom: 48px;
+  max-width: 450px;
+  min-width: 300px;
+  margin: 0px;
+
+}
+
+.fontItalic {
+  font-style: italic;
+}
+
+.btnPassword {
+  width: 190px;
+  padding: 14px;
+  margin-bottom: 40px;
+  background-color: #002171 !important;
+}
+
+.btnPassword:hover {
+  background-color: rgb(46, 48, 142) !important;
 }
