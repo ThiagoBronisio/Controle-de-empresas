@@ -4,12 +4,14 @@ import { NavLink } from "react-router-dom"
 import logo from "../imagens/logo.png"
 import * as helpers from "../helpers/auth-helpers"
 import Button from "@mui/material/Button"
+import  Avatar  from "@mui/material/Avatar";
 
 
 export default function Header() {
 
     const [nomeUsuario, setNomeUsuario] = useState("");
     const [autenticado, setAutenticado] = useState(false);
+
 
     useEffect(
         () => {
@@ -24,9 +26,9 @@ export default function Header() {
     );
 
     const sairPage = () => {
-        if (window.confirm("Deseja sair do sistema ?")){
+        if (window.confirm("Deseja sair do sistema ?")) {
             helpers.removerAccsessToken();
-            window.location.href = "/"; 
+            window.location.href = "/";
         } else {
             window.location.href = "#"
         }
@@ -85,6 +87,19 @@ export default function Header() {
 
                                 <li className="nav-item">
                                     <NavLink to="/register-account" className="nav-link text-light " aria-current="page">Registre-se</NavLink>
+                                </li>
+                            )
+                        }
+
+                        {
+                            autenticado && (
+
+                                <li className="nav-item bg-dark">
+                                    
+                                        <Avatar>
+                                            T
+                                        </Avatar>
+
                                 </li>
                             )
                         }

@@ -7,22 +7,17 @@ const ConsultarEmpresas = () => (
 
     <>
         <div>
-            <Header/>
+            <Header />
         </div>
-        <body className="mt-5 container">
-            <div className="row justify-content-center d-flex">
-                <div className="col-sm-12 col-lg-6 mt-4">
-                    <div className="card shadow ">
-                        <div className="card-body">
-                            <div className="text-center">
-                                <h3 className="baloo">CONSULTE A EMPRESA CADASTRADA</h3>
-                            </div>
-                            <ConsultarForms />
-                        </div>
-                    </div>
+        <main className="container" style={{marginTop:"64px"}}>
+            <div className="row justify-content-start d-flex">
+                <div className="col-12">
+                    <h3 className="baloo container primaryMUI">CONSULTE A EMPRESA CADASTRADA</h3>
+                    <ConsultarForms />
                 </div>
             </div>
-        </body>
+        </main>
+
     </>
 )
 

@@ -73,8 +73,8 @@ const HomePage = () => (
                 </div>
             </div>
             
-            <footer className="bg-light text-center shadow border-rounded mb-0 mt-5  text-dark">
-                <p className="p-1 mb-0">© 2022</p>
+            <footer className="bg-dark text-center shadow border-rounded mb-0 mt-5  text-light">
+                <p className="p-1 mb-0">© 2022 Thiago Bronisio</p>
             </footer>
 
         </section>

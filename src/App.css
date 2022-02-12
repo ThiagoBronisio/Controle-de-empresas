@@ -18,21 +18,6 @@
 .baloo {
   font-family: 'Baloo 2', cursive;
 }
-/* FIM */
-
-
-/* LABEL E INPUTS */
-.labell {
-  padding: 15px 2px 2px 2px ;
-  font-weight: 700;
-  font-size: 15px;
-  color: #6c757d;
-  margin-bottom: 6px;
-
-}
-
-
-/* FIM */
 
 /* BUTTONS DO PROJETO */
 .btn-cadastro {
@@ -56,8 +41,6 @@
 
 .btn-voltar:hover{
   background-color:#6c757d!important;
-  -webkit-box-shadow: none!important;
-  -moz-box-shadow: none!important;
   box-shadow: none!important;
   color: white !important;
 }
@@ -70,20 +53,13 @@
         color: white !important;
     }
 
-.bttn-register:hover {
-      background-color:#ffc709!important;
-      -webkit-box-shadow: none!important;
-      -moz-box-shadow: none!important;
-      box-shadow: none!important;
-      color: black !important;
-  }
-
 .mx-auto {
   margin-right: auto!important;
   margin-left: auto!important;
 }
 /* FIM */
 
+/* IMAGENS */
 .img-cadastro{
   max-width: 300px;
   min-width: 80px;
@@ -95,7 +71,11 @@
   min-width: 80px;
 }
 
+/* FIM */
+
+/* RESPONSE */
 .fixed { height: 100%; width: 100%; display: block; }
+
 
 .he-100 {
   height: 100vh !important;
@@ -104,6 +84,8 @@
 .ma-0 {
   margin: 0  !important;
 }
+
+/* FIM */
 
 .icon {
   padding: 9px 15px 0px 10px;
@@ -127,9 +109,6 @@
         cursor: pointer;
 }
 
-.register:hover {
-  color: black !important;
-}
 
 .form-register {
   padding: 60px;

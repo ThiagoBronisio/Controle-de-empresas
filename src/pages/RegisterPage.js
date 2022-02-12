@@ -15,7 +15,7 @@ const RegisterPage = () => (
                         <h1 className="text-center text-light mt-register">Bem vindo(a)</h1>
                         <h4 className="text-center text-light">Para se manter conectado conosco, faça login com suas informações pessoais</h4>
                         <div className="text-center mt-3 mt-lg-5 mb-3">
-                                <NavLink to="/" className="btn btn-outline-warning bttn-register"> ACESSAR CONTA <i className="fas fa-arrow-right text-warning register px-2"></i></NavLink>
+                                <NavLink to="/" className="btn btn-outline-warning bttn-register"> ACESSAR CONTA</NavLink>
                         </div>
 
                 </div>

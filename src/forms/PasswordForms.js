@@ -55,7 +55,7 @@ export default function PasswordForms() {
 
     return (
 
-        <form onSubmit={handleSubmit(onSubmit)} className="container">
+        <form onSubmit={handleSubmit(onSubmit)} className="container" autoComplete="off">
 
             {
                 mensagemSucesso &&
