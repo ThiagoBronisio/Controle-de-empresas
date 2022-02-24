@@ -1,29 +1,30 @@
 import axios from "axios";
-import * as config from "../config/api-register"
+import * as config from "../config/config-account"
+
 
 export const postLogin = (data) => {
-    return axios.post(config.getApiUrlContatos() + "/Account/Login", data)
+    return axios.post(config.getApiUrlAccount() + "/Account/Login", data)
         .then(
             response => {
-                return response.data;
+                return response.data
             }
         )
 }
 
 export const postRegister = (data) => {
-    return axios.post(config.getApiUrlContatos() + '/Account/Register', data)
+    return axios.post(config.getApiUrlAccount() + "/Account/Register", data)
         .then(
             response => {
-                return response.data;
+                return response.data
             }
         )
 }
 
 export const postPassword = (data) => {
-    return axios.post(config.getApiUrlContatos() + '/Account/PasswordRecover', data)
+    return axios.post(config.getApiUrlAccount() + "/Account/PasswordRecover", data)
         .then(
-            response =>{
-                return response.data;
+            response => {
+                return response.data
             }
         )
 }

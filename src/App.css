@@ -162,3 +162,7 @@
 .btnPassword:hover {
   background-color: rgb(46, 48, 142) !important;
 }
+
+.bgHeaderConsulta {
+  background-color: #292b2c !important;
+}

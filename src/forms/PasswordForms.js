@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form"
 import bootstrap from "bootstrap";
+import Swal from "sweetalert2";
 import textValidation from "../validation/text-validation";
 import TextField from "@mui/material/TextField";
 import { NavLink } from "react-router-dom"
 import * as accountServices from "../services/account-services"
-import Alert from "@mui/material/Alert"
 
 export default function PasswordForms() {
 
@@ -25,8 +25,15 @@ export default function PasswordForms() {
         accountServices.postPassword(data)
             .then(
                 result => {
-
-                    setMensagemSucesso(result.mensagem);
+                    Swal.fire({
+                        position: 'top-center',
+                        icon: 'success',
+                        title: "Parabéns",
+                        text: result.message,
+                        className:"baloo",
+                        showConfirmButton: false,
+                        timer: 3500
+                      })
                     reset({
                         email: ""
                     });
@@ -38,14 +45,40 @@ export default function PasswordForms() {
                     switch (e.response.status) {
                         case 422:
                             setMensagemErro("O email fornecido não está cadastrado no sistema")
+                            Swal.fire({
+                                position: 'top-center',
+                                icon: 'error',
+                                title: "Opss...",
+                                text: 'O email fornecido não está cadastrado no sistema',
+                                className:"baloo",
+                                showConfirmButton: false,
+                                timer: 3500
+                              })
                             break;
 
                         case 500:
-                            setMensagemErro("Erro, tente mais tarde")
+                            Swal.fire({
+                                position: 'top-center',
+                                icon: 'error',
+                                title: "Opss...",
+                                text: 'Erro, tente mais tarde',
+                                className:"baloo",
+                                showConfirmButton: false,
+                                timer: 3500
+                              })
                             break;
 
                         default:
-                            setMensagemErro("Erro, tente novamente")
+                            Swal.fire({
+                                position: 'top-center',
+                                icon: 'error',
+                                title: "Opss...",
+                                text: 'Erro, tente mais tarde',
+                                className:"baloo",
+                                showConfirmButton: false,
+                                timer: 3500
+                              })
+                            
                     }
                 }
             )
@@ -56,29 +89,6 @@ export default function PasswordForms() {
     return (
 
         <form onSubmit={handleSubmit(onSubmit)} className="container" autoComplete="off">
-
-            {
-                mensagemSucesso &&
-                <div className="row justify-content-center mt-3 mb-3">
-                    <div className="col-sm-12 col-lg-8"><Alert severity="success">
-                        {mensagemSucesso}
-                    </Alert>
-
-                    </div>
-                </div>
-            }
-
-            {
-                mensagemErro &&
-
-                <div className="row justify-content-center mt-3 mb-3">
-                    <div className="col-sm-12 col-lg-12"><Alert severity="error">
-                        {mensagemErro}
-                    </Alert>
-
-                    </div>
-                </div>
-            }
 
             <div className="row justify-content-start">
                 <div className="col-12">

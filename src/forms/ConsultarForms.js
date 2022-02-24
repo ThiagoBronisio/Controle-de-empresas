@@ -1,32 +1,35 @@
-import react, { useState } from "react";
+import react, { useState, useEffect } from "react";
 import { useForm, Controller } from 'react-hook-form';
 import { NavLink } from "react-router-dom";
+import * as services from "../services/empresas-services"
+import Swal from "sweetalert2";
 import bootstrap from "bootstrap";
 import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button"
+import SaveIcon from '@mui/icons-material/Save';
 import Modal from "react-modal";
-import { width } from "@mui/system";
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { borderRadius } from "@mui/system";
 
 Modal.setAppElement('#root')
 
 export default function ConsultarForms() {
 
-    const [modalIsOpen, setIsOpen] = useState(false);
-    const [modalEdit, setModalEdit] = useState(false)
+    const [mensagem, setMensagemSucesso] = useState("")
 
-    function openEdit() {
+    const [empresas, setEmpresa] = useState([])
+    const [empresaEdit, setEmpresaEdit] = useState({})
+
+    const [modalEdit, setModalEdit] = useState(false)
+    
+    function openEdit(data) {
         setModalEdit(true);
+        setEmpresaEdit(data);
     }
 
     function closeEdit() {
         setModalEdit(false)
-    }
-
-    function openModal() {
-        setIsOpen(true);
-    }
-
-    function closeModal() {
-        setIsOpen(false);
     }
 
     const customStyles = {
@@ -49,7 +52,8 @@ export default function ConsultarForms() {
             bottom: 'auto',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
-            height: "330px"
+            height: "370px",
+            borderRadius: "15px"
         },
     };
 
@@ -62,9 +66,63 @@ export default function ConsultarForms() {
 
     } = useForm();
 
-    const onSubmit = (data) => {
-        console.log(data)
+    const excluir = (idEmpresa) => {
+        if (window.confirm("Deseja excluir a empresa selecionada?")) {
+            setMensagemSucesso("")
+
+            services.deleteEmpresa(idEmpresa)
+                .then(
+                    result => {
+                        setMensagemSucesso("Empresa excluida com sucesso");
+                        Swal.fire({
+                            position: 'top-center',
+                            icon: 'success',
+                            title:"Sucesso!",
+                            text: result.message,
+                            showConfirmButton: false,
+                            timer: 3000
+                          })
+                        setEmpresa([]);
+                        reset({
+                            nomeFantasia: ""
+                        })
+                        setTimeout(function () {
+                            window.location.reload(1);
+                        },3000);
+                    }
+                )
+                .catch(
+                    e => {
+                        console.log(e)
+                    }
+                )
+        }
     }
+
+    const onSubmit = (data) => {
+
+
+        services.getEmpresaNameFantasy(data.nomeFantasia)
+            .then(
+                result => {
+                    setMensagemSucesso("Foram " + result.length + " empresa(s) encontrada com o nome informado")
+                    setEmpresa(result);
+                }
+            )
+            .catch(
+                e => {
+                    console.log(e)
+                }
+            )
+    }
+
+
+    const Editar = (data) => {
+        console.log("criar put")
+        console.log(data);
+    }
+
+
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="container" autoComplete="off">
@@ -74,14 +132,14 @@ export default function ConsultarForms() {
 
                     <Controller
                         control={control}
-                        name="empresa"
+                        name="nomeFantasia"
                         defaultValue=""
                         render={
                             ({ field: { onChange, onBlur, value } }) => (
 
                                 <TextField
 
-                                    id="email"
+                                    id="nomeFantasia"
                                     label="Nome da empresa"
                                     variant="outlined"
                                     className="form-control baloo mt-3"
@@ -102,113 +160,94 @@ export default function ConsultarForms() {
                 <button type="submit" className="btn btn-primary rounded-pill btnPassword mt-3"> Consultar</button>
             </div>
 
-            <p className=" text-secondary">Deseja cadastrar uma empresa ? <NavLink to="/cadastrar-empresas" className="text-decoration-none primaryMUI"> Clique aqui.</NavLink></p>
+            <p className=" text-secondary mb-4">Deseja cadastrar uma empresa ? <NavLink to="/cadastrar-empresas" className="text-decoration-none primaryMUI"> Clique aqui.</NavLink></p>
 
-            <div className="row justify-content-start  mt-4 ">
-                <div className="col-sm-12 col-lg-6 mt-2">
-                    <div className="card shadow border-4 mb-sm-3" style={{ borderBottom: "none", borderTop: "none", borderRight: "none", borderColor: "#002171" }}>
-                        <div className="card-body p-3">
+            {
+                mensagem && <div className="col-12 text-start text-secondary mb-2 fs-5 baloo">
+                    {mensagem}
+                </div>
+            }
 
-                            <div className="row">
-                                <div className="col-sm-12 col-lg-12">
-                                    <div>
-                                        <span className="px-1"><i class="fas fa-university fs-3"></i></span>
-                                        <span>-</span>
+            {empresas.map(
+                function (empresa, i) {
+                    return (
+                        <div className="row justify-content-start" style={{ marginBottom: "-15px" }}>
+                            <div className="col-sm-12 col-lg-6 mt-2 px-0">
+                                <div className="card shadow border-4 mb-sm-3" style={{ borderBottom: "none", borderTop: "none", borderRight: "none", borderColor: "#002171" }}>
+                                    <div className="card-body p-3">
 
-                                        <span className=" fw-nomrla baloo px-2">Valoreal Intermediações De Negócios</span>
+                                        <div className="row">
+                                            <div className="col-sm-12 col-lg-12">
+                                                <div>
 
+                                                    <div>
+                                                        <span className="px-1"><i class="fas fa-university fs-3"></i></span>
+                                                        <span>-</span>
+                                                        <span className=" fw-nomrla baloo px-2">{empresa.nomeFantasia}</span>
 
-                                        <span type="button" onClick={openModal} className="primaryMUI fs-4 position-absolute end-0 px-2" style={{}} >
-                                            <i class="fas fa-eye"></i>
-                                        </span>
+                                                    </div>
 
-                                        <Modal
-                                            isOpen={modalIsOpen}
-                                            onRequestClose={closeModal}
-                                            style={customStyles}
+                                                    <div>
 
-                                        >
-                                            <div className="row">
-                                                <div className="col-12 bg-dark">
-                                                    <span type="button" className=" text-danger fs-2 position-absolute top-0 end-0 px-4 " onClick={closeModal}><i class="fal fa-times"></i></span>
-                                                </div>
-                                            </div>
+                                                        <span type="button" onClick={() => {openEdit(empresa)}} className="primaryMUI fs-4 position-absolute top-0 end-0 mt-3 mx-2">
+                                                            <i class="fas fa-edit"></i>
+                                                        </span>
 
+                                                        
 
-                                            <div className="row justify-content-start">
-                                                <div className="col-sm-12 col-lg-12">
+                                                            <Modal
+                                                                isOpen={modalEdit}
+                                                                onRequestClose={closeEdit}
+                                                                style={customModalEdit}>
+                                                                <div className="row container">
 
-                                                    <div className="card shadow border-4 mt-4" style={{ borderBottom: "none", borderTop: "none", borderRight: "none", borderColor: "#002171" }}>
-                                                        <div className="card-body">
+                                                                    <div className="col-12 bg-dark">
+                                                                        <p type="button" className=" text-danger fs-2 position-absolute top-0 end-0 px-4 " onClick={closeEdit}><i class="fal fa-times"></i></p>
+                                                                    </div>
 
-                                                            <div className="row">
-                                                                <div className="col-sm-12 col-lg-12">
-                                                                    <div>
-                                                                        <p className="baloo fw-normal mb-1"> <strong className="fs-5">Nome da empresa</strong> - Valoreal </p>
-                                                                        <p className="baloo fw-normal mb-1"> <strong className="fs-5">Razão Social</strong> - Valoreal Intermediações de Negócios LTDA </p>
-                                                                        <p className="baloo fw-normal mb-1"> <strong className="fs-5">CNPJ</strong> - 46.126.396/0001-19 </p>
-                                                                        <p className="baloo fw-normal mb-1"> <strong className="fs-5">Telefone</strong> - (21) 96584-6290 </p>
+                                                                    <div className="col-12">
+                                                                        <div className="card shadow border-5 mt-3" style={{ borderBottom: "none", borderTop: "none", borderRight: "none", borderColor: "#002171" }}>
+                                                                            <div className="card-body" style={{ paddingBottom: "2px" }}>
+                                                                                <p className="col-sm-12 col-lg-12 mt-1"><TextField fullWidth size="small" label="Nome Fantasia" variant="outlined" value={empresaEdit.nomeFantasia}  /></p>
+                                                                                <p className="col-sm-12 col-lg-12"><TextField fullWidth size="small" label='Empresa' variant="outlined" value={empresaEdit.razaoSocial}  /></p>
+                                                                                <p className="col-sm-12 col-lg-12"><TextField fullWidth size="small" label='CNPJ' variant="outlined" value={empresaEdit.cnpj}   /></p>
+                                                                                <p className="col-sm-12 col-lg-12"><TextField fullWidth size="small" label='Telefone' variant="outlined" value={empresaEdit.telefone} /></p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div className="justify-content-center d-flex container mt-3">
+                                                                        <Button type="submit" onClick={() => {Editar(empresaEdit)}} variant="contained" endIcon={<SaveIcon />}>
+                                                                            Salvar
+                                                                        </Button>
+                                                                        <Button variant="contained" color="error" className="mx-2" onClick={closeEdit} >
+                                                                            CANCELAR
+                                                                        </Button>
                                                                     </div>
                                                                 </div>
-
-
-                                                            </div>
-
-                                                        </div>
+                                                            </Modal>
+                                                        
                                                     </div>
-
                                                 </div>
-
                                             </div>
-                                        </Modal>
-
-                                        <div>
-                                            <span type="button" onClick={openEdit} className="primaryMUI fs-4 position-absolute top-0 start-0 mt-3" style={{ marginBottom: "10px", marginLeft: "540px" }} >
-                                                <i class="fas fa-edit"></i>
-                                            </span>
-
-
-
-                                            <Modal
-                                                isOpen={modalEdit}
-                                                onRequestClose={closeEdit}
-                                                style={customModalEdit}>
-                                                <div className="row container">
-
-                                                    <div className="col-12 bg-dark">
-                                                        <p type="button" className=" text-danger fs-2 position-absolute top-0 end-0 px-4 " onClick={closeEdit}><i class="fal fa-times"></i></p>
-                                                    </div>
-
-                                                    
-                                                        <div className="col-12 mt-4">
-                                                            <p className="col-sm-12 col-lg-12"><TextField fullWidth size="small" label="Nome da empresa" variant="outlined" /></p>
-                                                            <p className="col-sm-12 col-lg-12"><TextField fullWidth size="small" label="Razão social" variant="outlined" /></p>
-                                                            <p className="col-sm-12 col-lg-12"><TextField fullWidth size="small" label="CNPJ" variant="outlined" /></p>
-                                                            <p className="col-sm-12 col-lg-12"><TextField fullWidth size="small" label="Telefone" variant="outlined" /></p>
-                                                        </div>
-                                                    
-
-                                                    <div className="justify-content-center d-flex container">
-                                                        <button className="btn btn-primary  col-3"> Editar</button>
-                                                        <button className="btn btn-danger  col-3 mx-2" onClick={closeEdit}> Cancelar</button>
-                                                    </div>
-                                                </div>
-                                            </Modal>
                                         </div>
-
                                     </div>
-
                                 </div>
+                            </div>
 
-
+                            <div className="col-lg-1 p-0 position-absolute start-50 d-none d-lg-block" style={{ marginTop: "20px" }}>
+                                <IconButton color="error" aria-label="upload picture" component="span"
+                                    onClick={() => { excluir(empresa.idEmpresa) }}>
+                                    <DeleteIcon className="fs-2" />
+                                </IconButton>
                             </div>
 
                         </div>
-                    </div>
-                </div>
+                    )
+                }
+            )
 
-            </div>
-
+            }
         </form >
     )
 }

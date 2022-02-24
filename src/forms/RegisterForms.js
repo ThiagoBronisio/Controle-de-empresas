@@ -1,12 +1,11 @@
 import react, { useState } from "react";
 import { useForm, Controller } from 'react-hook-form';
 import bootstrap from "bootstrap";
-import * as authHelpers from "../helpers/auth-helpers"
+import Swal from 'sweetalert2'
 import * as accountServices from "../services/account-services"
 import textValidation from "../validation/text-validation";
 import passwordValidation from "../validation/password-validation";
 import TextField from "@mui/material/TextField";
-import Alert from "@mui/material/Alert"
 
 
 export default function RegisterForms() {
@@ -24,71 +23,73 @@ export default function RegisterForms() {
     } = useForm()
 
     const onSubmit = (data) => {
-        setMensagemSucesso("")
-        setMensagemErro("")
-
+       
         accountServices.postRegister(data)
-            .then(
+            .then (
                 result => {
-                    setMensagemSucesso(result.message)
-                    reset({
-                        nome: '',
-                        email: '',
-                        senha: '',
-                        senhaConfirmacao: ''
-                    })
+                    Swal.fire({
+                        position: 'top-center',
+                        icon: 'success',
+                        title: "Parabéns",
+                        text: result.message,
+                        className:"baloo",
+                        showConfirmButton: false,
+                        timer: 3500
+                      })
+                        reset({
+                            nome:'',
+                            email:'',
+                            senha:'',
+                            senhaConfirmacao:''
+                        })
                 }
             )
-            .catch(
+            .catch (
+
                 e => {
                     switch(e.response.status){
                         case 400:
-                            setMensagemErro("As senhas não conferem.")
+                            Swal.fire({
+                                position: 'top-center',
+                                icon: 'error',
+                                title:"Opss...",
+                                text:"As senhas não conferem.",
+                                showConfirmButton: false,
+                                timer: 3500
+                              })
                        break;
                         
                        case 422:
-                           setMensagemErro("Email já cadastro em nosso sistema.")
+                           Swal.fire({
+                            position: 'top-center',
+                            icon: 'error',
+                            title:"Opss...",
+                            text:"Email já cadastro em nosso sistema.",
+                            showConfirmButton: false,
+                            timer: 3500
+                          })
                         break;
 
                         default:
-                            setMensagemErro("Erro, tente mais tarde.")
+                            Swal.fire({
+                                position: 'top-center',
+                                icon: 'error',
+                                title:"Opss...",
+                                text:"Erro, tente mais tarde.",
+                                showConfirmButton: false,
+                                timer: 3500
+                              })
+                            
                     }
 
                     
                 }
             )
-
     }
 
     return (
 
         <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-
-            {
-                mensagemSucesso &&
-                <div className="row justify-content-center mt-4">
-                    <div className="col-sm-12 col-lg-8"><Alert severity="success">
-                        {mensagemSucesso}
-                    </Alert>
-
-                    </div>
-                </div>
-            }
-
-            {
-                mensagemErro &&
-
-                <div className="row justify-content-center mt-4">
-                    <div className="col-sm-12 col-lg-8"><Alert severity="error">
-                        {mensagemErro}
-                    </Alert>
-
-                    </div>
-                </div>
-            }
-
-
-
 
             <div className="row mt-4 m-0 justify-content-center d-flex ">
                 <label className="mb-1 text-center">Preencha os campos abaixo</label>

@@ -2,12 +2,12 @@ import react, { useState } from "react";
 import { useForm, Controller } from "react-hook-form"
 import { NavLink } from "react-router-dom"
 import InputMask from "react-input-mask";
+import Swal from "sweetalert2";
 import bootstrap from "bootstrap";
-import textValidation from "../validation/text-validation";
-import * as services from "../services/empresas-services"
-import * as helpers from "../helpers/auth-helpers"
+import cnpjValidation from "../validation/cnpj-validation";
+import telValidation from "../validation/tel-validation";
 import TextField from "@mui/material/TextField";
-import Alert from "@mui/material/Alert"
+import * as empServices from "../services/empresas-services"
 
 
 export default function CadastrarEmpresas() {
@@ -25,42 +25,42 @@ export default function CadastrarEmpresas() {
 
     const onSubmit = (data) => {
 
+        setMensagemSucesso('')
+        setMensagemSucesso('')
 
-        services.postEmpresas(data)
+        empServices.postEmpresa(data)
             .then(
                 result => {
-                    setMensagemSucesso(result.message);
+                    Swal.fire({
+                        position: 'top-center',
+                        icon: 'success',
+                        title: "Parabéns!",
+                        text: `${result.message}.`,
+                        className:"baloo",
+                        showConfirmButton: false,
+                        timer: 3500
+                      })
                     reset({
-                        nomeFantasia: '',
-                        razaoSocial: '',
-                        cnpj: '',
-                        telefone: ''
+                        nomeFantasia: "",
+                        razaoSocial: "",
+                        cnpj: "",
+                        telefone: ""
                     });
+
                 }
             )
             .catch(
                 e => {
-                    console.log(e.response);
-                    setMensagemErro("Erro! Não foi possivel cadastrar a empresa");
+                    setMensagemErro(e.message)
+                    console.log(e)
                 }
             )
+
     }
 
     return (
 
         <form onSubmit={handleSubmit(onSubmit)} className=" container" style={{ paddingTop: "60px", paddingRight: "60px", paddingBottom: "60", paddingLeft: "60px" }} autoComplete="off">
-
-{
-                mensagemSucesso && <div className="mb-3"><Alert severity="success" size="normal">
-                    {mensagemSucesso}
-                </Alert></div>
-            }
-
-            {
-                mensagemErro && <div className="mb-3"><Alert severity="error" size="normal">
-                    {mensagemErro}
-                </Alert></div>
-            }
 
             <div className="row justify-content-center d-flex">
                 <div className="col-sm-12 col-lg-10 ">
@@ -128,7 +128,7 @@ export default function CadastrarEmpresas() {
                         control={control}
                         name="cnpj"
                         defaultValue=""
-                        rules={{ validate: textValidation }}
+                        rules={{ validate: cnpjValidation }}
                         render={
                             ({ field: { onChange, onBlur, value } }) => (
 
@@ -172,7 +172,7 @@ export default function CadastrarEmpresas() {
                         control={control}
                         name="telefone"
                         defaultValue=""
-                        rules={{ validate: textValidation }}
+                        rules={{ validate: telValidation }}
                         render={
                             ({ field: { onChange, onBlur, value } }) => (
                                 <InputMask

@@ -48,7 +48,7 @@ export default function CadastrarEmpresas() {
                     <div className=" px-0 bg-light he-100 w-100" style={{paddingTop: "50px"}}>
 
                             <div className="text-start px-5">
-                                <p className="col-sm-12 col-lg-12 container baloo">Deseja sair da conta ? <a href="#" onClick={ () => sairPage() }>Clique aqui</a></p></div>
+                                <p className="col-sm-12 col-lg-12 container baloo">Deseja sair da conta ?  <a href="#" style={{fontSize:"19px"}} className=" text-danger text-decoration-none" onClick={ () => sairPage() }> Clique Aqui</a></p></div>
                             <div className="text-start px-5 ">
                                 <h5 className="baloo text-dark col-sm-12 col-lg-12 container">Preencha as informações abaixo para cadastrar a empresa desejada.</h5>
                             </div>

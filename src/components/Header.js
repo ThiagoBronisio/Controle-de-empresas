@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom"
 import logo from "../imagens/logo.png"
 import * as helpers from "../helpers/auth-helpers"
 import Button from "@mui/material/Button"
-import  Avatar  from "@mui/material/Avatar";
 
 
 export default function Header() {
@@ -41,10 +40,12 @@ export default function Header() {
 
             <div className="container ">
 
-                <NavLink to="/" className="navbar-brand fw-bolder">
-                    <img src={logo} style={{ width: "200px" }} className="navbar-brand  text-light text-start p-0"></img>
-                </NavLink>
-
+                { !autenticado && (
+                    <NavLink to="/" className="navbar-brand fw-bolder">
+                        <img src={logo} style={{ width: "200px" }} className="navbar-brand  text-light text-start p-0"></img>
+                    </NavLink>
+                )
+                }
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
 
                     <ul className="navbar-nav">
@@ -55,6 +56,7 @@ export default function Header() {
                                     <NavLink to="/cadastrar-empresas" className="nav-link text-light" aria-current="page">Cadastro </NavLink>
                                 </li>
                             )
+                            
                         }
 
                         {
@@ -91,18 +93,6 @@ export default function Header() {
                             )
                         }
 
-                        {
-                            autenticado && (
-
-                                <li className="nav-item bg-dark">
-                                    
-                                        <Avatar>
-                                            T
-                                        </Avatar>
-
-                                </li>
-                            )
-                        }
                     </ul>
 
                 </div>

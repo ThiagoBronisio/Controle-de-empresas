@@ -2,12 +2,12 @@ import react, { useState } from "react";
 import reactDom from "react-dom";
 import { useForm, Controller } from "react-hook-form";
 import bootstrap from "bootstrap";
+import Swal from "sweetalert2";
 import * as authHelpers from "../helpers/auth-helpers"
 import * as accountServices from "../services/account-services"
 import { NavLink } from "react-router-dom";
 import textValidation from "../validation/text-validation";
 import TextField from "@mui/material/TextField";
-import Alert from "@mui/material/Alert"
 import passwordValidation from "../validation/password-validation";
 
 
@@ -33,7 +33,7 @@ export default function HomeForms() {
             .then(
                 result => {
 
-                    authHelpers.singIn(result);
+                    authHelpers.singIn(result.accessToken);
                     reset({
                         email: "",
                         senha: ""
@@ -43,8 +43,16 @@ export default function HomeForms() {
             )
             .catch(
                 e => {
-                    setMensagemErro("Usuário inválido")
                     console.log(e.response)
+                    Swal.fire({
+                        position: 'top-center',
+                        icon: 'error',
+                        title: "Opss...",
+                        text: 'Usuário inválido',
+                        className:"baloo",
+                        showConfirmButton: false,
+                        timer: 3500
+                      })
                 }
             )
 
@@ -52,13 +60,6 @@ export default function HomeForms() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="px-4" autoComplete="off">
-
-            {
-                mensagemErro && <Alert severity="error" size="normal">
-                    {mensagemErro}
-                </Alert>
-            }
-
 
             <div className="row">
                 <div className="col-12 mt-3">

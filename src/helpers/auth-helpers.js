@@ -1,29 +1,27 @@
 export const singIn = (data) => {
-    localStorage.setItem("USER_AUTH", JSON.stringify(data));
+     localStorage.setItem("ACCESS_TOKEN", data);
 }
 
 export const getAccsessToken = () => {
-   var data = localStorage.getItem("USER_AUTH");
-   var auth = JSON.stringify(data)
-   return auth.accsesToken
+  return localStorage.getItem("ACCESS_TOKEN")
 }
 
-export const getUsuario = () => {
-    var data = localStorage.getItem("USER_AUTH");
-    var auth = JSON.stringify(data);
-    return auth.usuario;
+export const getUsuario = (data) => {
+    var data = localStorage.getItem("ACCESS_TOKEN");
+    var user = JSON.stringify(data);
+    return user.usuario;
 }
 
 export const getEmail = () => {
-    var data = localStorage.getItem("USER_AUTH");
-    var auth = JSON.stringify(data);
-    return auth.email;
+    var data = localStorage.getItem("ACCESS_TOKEN");
+    var user = JSON.stringify(data);
+    return user.email;
 }
 
 export const removerAccsessToken = () => {
-    localStorage.removeItem("USER_AUTH") ;
+    localStorage.removeItem("ACCESS_TOKEN") ;
 }
 
 export const isAutenticated = () => {
-    return localStorage.getItem("USER_AUTH") != null;
+    return localStorage.getItem("ACCESS_TOKEN") != null;
 }
